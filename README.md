@@ -1,5 +1,5 @@
 # Projektin aihe
-Meidän aihe on Säästölaskuri. Sivun ideana on että käyttäjä pystyy syöttämään vuosi, kuukausi ja päivä kohtaisesti omia säästötavoitteita ja jo saavutettuja säästöjä.
+Meidän aihe on Säästölaskuri. Sivun ideana on että käyttäjä pystyy syöttämään vuosikohtaisesti säästötavoitteet, kuukausikohtaisesti toteutuneet säästösummat sekä tarkastelemaan jo saavutettuja säästöjä.
 
 
 
