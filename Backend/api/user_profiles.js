@@ -1,0 +1,79 @@
+const express = require("express");
+const router = express.Router();
+
+//Voidaan käsitellä Postmanin lähettämää dataa
+//app.use(express.json());
+//Käyttäjä scheman importtaus
+
+const User = require('../models/user');
+
+//Käyttäjän luonti
+router.post('/api/sign-up', async (req,res) =>{
+    try{
+        const result = await User.create(req.body);
+        res.status(201).json("Account created successfully");
+    }
+    catch(error){
+        console.log(error);
+        res.status(400).json("Something went wrong");
+    }
+});
+
+//Etsitään kaikki
+router.get('/api/users', async (req,res) => {
+    try{
+        const result = await User.find();
+        res.status(200).json(
+            {
+                status: "Succes",
+                results: result.length,
+                data: result
+            }
+        );
+    }catch(error){
+        console.log(error);
+        res.status(400).json(
+            {
+                msg: "Something went wrong"
+            }
+        )
+    }
+});
+
+//Käyttäjän etsiminen ID:llä
+router.get('/api/user/:id', async (req,res) =>{
+    const userId = req.params.id;
+    try{
+        const user = await User.findById(userId);
+        res.status(200).json(user);
+    }catch (error){
+        console.log(error);
+        res.status(400).json(
+            {
+                msg: "Something went wrong"
+            }
+        )
+    }
+});
+
+//Muokkaus
+router.patch('/api/user-update/:id', async(req,res) =>{
+    const userToUpdate = req.params.id;
+    const newName = req.body.userName;
+    try{
+        const user = await User.findById(userToUpdate);
+        if(user){
+            const result = await User.updateOne(
+                {_id: userToUpdate},
+                { $set: {userName: newName}}
+            );
+            res.status(200).json("User updated successfully");
+        }else{
+            res.status(204).json("No such user");
+        }
+    }catch (error){
+        console.log(error);
+    }
+});
+
+module.exports = router;
