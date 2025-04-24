@@ -6,6 +6,10 @@ const port = 3000;
 
 connectDB();
 
+app.use(express.json());
+//API endpointit
+app.use('', require('./api/user_profiles'));
+
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
