@@ -75,5 +75,23 @@ router.patch('/api/user-update/:id', async(req,res) =>{
         console.log(error);
     }
 });
-
+// Poista käyttäjä
+router.delete('/api/user-delete/:id', async (req,res) => {
+    const userId = req.params.id;
+    try{
+        const user = await User.deleteOne({_id: userId});
+        res.status(200).json(
+        {
+            msg: "User deleted successfully"
+        } 
+    )
+    }catch (error){
+        console.log(error);
+        res.status(400).json(
+            {
+                msg: "Something went wrong"
+            }
+        ) 
+    }
+})
 module.exports = router;
