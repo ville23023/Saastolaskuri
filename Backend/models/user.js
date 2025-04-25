@@ -16,6 +16,16 @@ const userSchema = new mongoose.Schema({
         minlength:8,
         maxlength:16,
         trim:true
+    },
+    favoriteThing:{
+        type: [String],
+        required: true,
+        validate: {
+            validator: function(arr){
+                return arr.length > 0;
+            },
+            message: "List atleast one thing"
+        }
     }
 });
 
