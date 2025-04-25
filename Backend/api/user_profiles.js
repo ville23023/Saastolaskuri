@@ -1,10 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-//Voidaan käsitellä Postmanin lähettämää dataa
-//app.use(express.json());
-//Käyttäjä scheman importtaus
 
+//Käyttäjä scheman importtaus
 const User = require('../models/user');
 
 //Käyttäjän luonti
@@ -59,13 +57,17 @@ router.get('/api/user/:id', async (req,res) =>{
 //Muokkaus
 router.patch('/api/user-update/:id', async(req,res) =>{
     const userToUpdate = req.params.id;
-    const newName = req.body.userName;
+    const {userName, password, favoriteThing} = req.body;
     try{
         const user = await User.findById(userToUpdate);
         if(user){
             const result = await User.updateOne(
                 {_id: userToUpdate},
-                { $set: {userName: newName}}
+                { $set:{
+                    userName: userName,
+                    password: password,
+                    favoriteThing: favoriteThing
+                }}
             );
             res.status(200).json("User updated successfully");
         }else{
@@ -75,6 +77,7 @@ router.patch('/api/user-update/:id', async(req,res) =>{
         console.log(error);
     }
 });
+
 // Poista käyttäjä
 router.delete('/api/user-delete/:id', async (req,res) => {
     const userId = req.params.id;
@@ -94,4 +97,16 @@ router.delete('/api/user-delete/:id', async (req,res) => {
         ) 
     }
 })
+
+//Testi ukon luonti
+router.post('/api/test_user_creation', async (req, res) =>{
+    try{
+        const test_user = await User.create({userName: 'testi-ukko', password:'password123', favoriteThing:'omena, banaani'});
+        res.status(201).json("Test user created");
+    }catch (error){
+        console.log(error);
+        res.status(400).json("Something went wrong");
+    }
+});
+
 module.exports = router;
