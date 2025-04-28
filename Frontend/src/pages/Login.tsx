@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "../index.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -14,11 +15,12 @@ const Login: React.FC = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ userName: username, password })
     });
 
     if (response.ok) {
       console.log("Login successful");
+      navigate("/counter");
     } else {
       console.log("Login failed");
     }
