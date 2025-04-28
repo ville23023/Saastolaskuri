@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+const bcrypt = require("bcryptjs");
 
 //Käyttäjä scheman importtaus
 const User = require('../models/user');
@@ -16,7 +16,20 @@ router.post('/api/sign-up', async (req,res) =>{
         res.status(400).json("Something went wrong");
     }
 });
-
+// Kirjautuminen login-lomakkeella
+router.post("/api/login", async (req, res) => {
+    const { userName, password } = req.body;
+    try {
+      const user = await User.findOne({ userName });
+      if (!user || !(await bcrypt.compare(password, user.password))) {
+        return res.status(401).send("Incorrect username or password");
+      }
+      res.status(200).send("Login successful");
+    } catch (err) {
+      console.log(err);
+      res.status(400).send("Something went wrong");
+    }
+});
 //Etsitään kaikki
 router.get('/api/users', async (req,res) => {
     try{
