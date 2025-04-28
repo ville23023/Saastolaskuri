@@ -12,7 +12,7 @@ const Signup: React.FC = () => {
     e.preventDefault();
 
     //Login endpoint tekemättä. Samaan syssyyn JWT token kuntoon.
-    const response = await fetch("http://localhost:3000/api/login", {
+    const response = await fetch("http://localhost:3000/api/sign-up", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
