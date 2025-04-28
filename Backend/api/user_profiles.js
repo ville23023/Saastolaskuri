@@ -17,6 +17,9 @@ router.post('/api/sign-up', async (req,res) =>{
     }
 });
 
+
+
+
 //Etsitään kaikki
 router.get('/api/users', async (req,res) => {
     try{

@@ -1,26 +1,39 @@
 import React, { useState } from "react";
 import "../index.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:3000/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
-    });
+    try {
+      const response = await fetch("http://localhost:3000/api/login", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
 
-    if (response.ok) {
-      console.log("Login successful");
-    } else {
-      console.log("Login failed");
+      if (response.ok) {
+        const data = await response.json();
+        const token = data.token;
+
+        localStorage.setItem("token", token);
+        console.log("Login Successful");
+        navigate("/counter");
+      } else {
+        const errData = await response.json();
+        setError(errData.message || "Login failed. Please try again.");
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+      setError("Server error. Please try again later");
     }
   };
 
@@ -31,6 +44,7 @@ const Login: React.FC = () => {
         className="bg-white p-8 rounded-lg shadow-lg w-96"
       >
         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+        {error && <p className="mb-4 text-red-500 text-center">{error}</p>}
         <div className="mb-4">
           <label
             htmlFor="username"
