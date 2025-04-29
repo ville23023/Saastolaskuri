@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 //Käyttäjä scheman importtaus
 const User = require('../models/user');
@@ -24,6 +25,9 @@ router.post("/api/login", async (req, res) => {
       if (!user || !(await bcrypt.compare(password, user.password))) {
         return res.status(401).send("Incorrect username or password");
       }
+      const token = jwt.sign({userId: user._id}, process.env.JWT_SECRET_KEY, {expiresIn: '1h'});
+      //tulostaa tokenin jotta sitä voi kokeilla postmanin puolella
+      //console.log(token);
       res.status(200).send("Login successful");
     } catch (err) {
       console.log(err);
