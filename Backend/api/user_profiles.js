@@ -2,9 +2,8 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
-//Käyttäjä scheman importtaus
 const User = require("../models/user");
+const authenticate = require("../middleware/authUser");
 
 //Käyttäjän luonti
 router.post("/api/sign-up", async (req, res) => {
@@ -27,10 +26,6 @@ router.post("/api/login", async (req, res) => {
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, {
       expiresIn: "1h",
     });
-    //tulostaa tokenin jotta sitä voi kokeilla postmanin puolella
-    //console.log(token);
-
-    // Tokenin luonti hallitaan oikein mutta endpointin tulee myös palauttaa luotu token jotta frontend pystyy sitä hyödyntämään.
     res.status(200).json({ message: "Login successful", token });
   } catch (err) {
     console.log(err);
@@ -38,7 +33,7 @@ router.post("/api/login", async (req, res) => {
   }
 });
 //Etsitään kaikki
-router.get("/api/users", async (req, res) => {
+router.get("/api/users", authenticate, async (req, res) => {
   try {
     const result = await User.find();
     res.status(200).json({
