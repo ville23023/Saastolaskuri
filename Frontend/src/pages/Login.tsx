@@ -12,17 +12,18 @@ const Login: React.FC = () => {
 
     const response = await fetch("http://localhost:3000/api/login", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ userName: username, password })
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userName: username, password }),
     });
 
-    if (response.ok) {
+    const data = await response.json();
+
+    if (response.ok && data.token) {
       console.log("Login successful");
+      localStorage.setItem("token", data.token);
       navigate("/counter");
     } else {
-      console.log("Login failed");
+      console.log("Login failed:", data);
     }
   };
 
@@ -43,9 +44,10 @@ const Login: React.FC = () => {
           <input
             id="username"
             type="text"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            autoComplete="off"
           />
         </div>
         <div className="mb-4">
@@ -58,22 +60,20 @@ const Login: React.FC = () => {
           <input
             id="password"
             type="password"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            autoComplete="off"
           />
         </div>
         <button
           type="submit"
-          className="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          className="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
         >
           Login
-        </button>{" "}
+        </button>
         <p className="p-4">
-          Don't have an account?{" "}
-          <Link to="/signup" className="">
-            Sign up here
-          </Link>
+          Don&apos;t have an account? <Link to="/signup">Sign up here</Link>
         </p>
       </form>
     </div>

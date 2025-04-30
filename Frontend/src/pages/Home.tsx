@@ -9,21 +9,6 @@ const Home = () => {
         orci a massa viverra, nec dapibus elit placerat. Nulla facilisi. Integer
         condimentum ac libero at iaculis.
       </p>
-
-      <div className="mt-6 animate__animated animate__fadeIn animate__delay-2s">
-        <a
-          href="/login"
-          className="px-6 py-3 bg-white text-blue-600 rounded-lg shadow-lg hover:bg-blue-700 hover:text-white transition-all duration-300"
-        >
-          Go to Login
-        </a>
-        <a
-          href="/signup"
-          className="px-6 py-3 bg-white text-blue-600 rounded-lg shadow-lg hover:bg-blue-700 hover:text-white transition-all duration-300"
-        >
-          Register
-        </a>
-      </div>
     </div>
   );
 };
