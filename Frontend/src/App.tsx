@@ -4,7 +4,8 @@ import Layout from "./components/Layout";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Home from "./pages/Home";
-import Counter from "./pages/Counter";
+import CalculatorApp from "./pages/CalculatorApp";
+import PrivateRoute from "./PrivateRoute";
 import "./index.css";
 
 const App: React.FC = () => {
@@ -15,7 +16,11 @@ const App: React.FC = () => {
           <Route index element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/counter" element={<Counter />} />
+
+          {/* Protected route for counter */}
+          <Route element={<PrivateRoute />}>
+            <Route path="/counter" element={<CalculatorApp />} />
+          </Route>
         </Route>
       </Routes>
     </Router>

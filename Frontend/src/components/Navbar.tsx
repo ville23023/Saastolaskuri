@@ -1,12 +1,20 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
 const Navbar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const isLoggedIn = !!localStorage.getItem("token");
 
   const toggleMenu = () => {
     setMenuOpen((prev) => !prev);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
   };
 
   return (
@@ -21,15 +29,26 @@ const Navbar: React.FC = () => {
           <Link to="/" className="hover:text-gray-300">
             Home
           </Link>
-          <Link to="/login" className="hover:text-gray-300">
-            Log in
-          </Link>
-          <Link to="/signup" className="hover:text-gray-300">
-            Sign up
-          </Link>
-          <Link to="/counter" className="hover:text-gray-300">
-            Counter
-          </Link>
+          {!isLoggedIn && (
+            <>
+              <Link to="/login" className="hover:text-gray-300">
+                Log in
+              </Link>
+              <Link to="/signup" className="hover:text-gray-300">
+                Sign up
+              </Link>
+            </>
+          )}
+          {isLoggedIn && (
+            <>
+              <Link to="/counter" className="hover:text-gray-300">
+                Counter
+              </Link>
+              <button onClick={handleLogout} className="hover:text-gray-300">
+                Logout
+              </button>
+            </>
+          )}
         </div>
 
         {/* Mobile menu button */}
@@ -50,27 +69,44 @@ const Navbar: React.FC = () => {
           >
             Home
           </Link>
-          <Link
-            to="/login"
-            onClick={() => setMenuOpen(false)}
-            className="hover:text-gray-300"
-          >
-            Log in
-          </Link>
-          <Link
-            to="/signup"
-            onClick={() => setMenuOpen(false)}
-            className="hover:text-gray-300"
-          >
-            Sign up
-          </Link>
-          <Link
-            to="/counter"
-            onClick={() => setMenuOpen(false)}
-            className="hover:text-gray-300"
-          >
-            Counter
-          </Link>
+          {!isLoggedIn && (
+            <>
+              <Link
+                to="/login"
+                onClick={() => setMenuOpen(false)}
+                className="hover:text-gray-300"
+              >
+                Log in
+              </Link>
+              <Link
+                to="/signup"
+                onClick={() => setMenuOpen(false)}
+                className="hover:text-gray-300"
+              >
+                Sign up
+              </Link>
+            </>
+          )}
+          {isLoggedIn && (
+            <>
+              <Link
+                to="/counter"
+                onClick={() => setMenuOpen(false)}
+                className="hover:text-gray-300"
+              >
+                Counter
+              </Link>
+              <button
+                onClick={() => {
+                  handleLogout();
+                  setMenuOpen(false);
+                }}
+                className="hover:text-gray-300 text-left"
+              >
+                Logout
+              </button>
+            </>
+          )}
         </div>
       )}
     </nav>
