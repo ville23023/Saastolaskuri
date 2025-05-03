@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const authenticate = require("../middleware/authUser");
 
-//Käyttäjän luonti
+//Account creation
 router.post("/api/sign-up", async (req, res) => {
   try {
     const result = await User.create(req.body);
@@ -15,7 +15,7 @@ router.post("/api/sign-up", async (req, res) => {
     res.status(400).json("Something went wrong");
   }
 });
-// Kirjautuminen login-lomakkeella
+//Login
 router.post("/api/login", async (req, res) => {
   const { userName, password } = req.body;
   try {
@@ -32,7 +32,7 @@ router.post("/api/login", async (req, res) => {
     res.status(400).send("Something went wrong");
   }
 });
-//Etsitään kaikki
+//List all users
 router.get("/api/users", authenticate, async (req, res) => {
   try {
     const result = await User.find();
@@ -43,13 +43,10 @@ router.get("/api/users", authenticate, async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    res.status(400).json({
-      msg: "Something went wrong",
-    });
+    res.status(400).json("Something went wrong");
   }
 });
-
-//Käyttäjän etsiminen ID:llä
+//Find user by its ID
 router.get("/api/user/:id", async (req, res) => {
   const userId = req.params.id;
   try {
@@ -57,16 +54,13 @@ router.get("/api/user/:id", async (req, res) => {
     res.status(200).json(user);
   } catch (error) {
     console.log(error);
-    res.status(400).json({
-      msg: "Something went wrong",
-    });
+    res.status(400).json("Something went wrong");
   }
 });
-
-//Muokkaus
+//Update user
 router.patch("/api/user-update/:id", async (req, res) => {
   const userToUpdate = req.params.id;
-  const { userName, password, favoriteThing } = req.body;
+  const { userName, password} = req.body;
   try {
     const user = await User.findById(userToUpdate);
     if (user) {
@@ -76,42 +70,35 @@ router.patch("/api/user-update/:id", async (req, res) => {
           $set: {
             userName: userName,
             password: password,
-            favoriteThing: favoriteThing,
           },
         }
       );
       res.status(200).json("User updated successfully");
     } else {
-      res.status(204).json("No such user");
+      res.status(204).json("User not found");
     }
   } catch (error) {
     console.log(error);
+    res.status(400).json("Something went wrong")
   }
 });
-
-// Poista käyttäjä
+//Delete user
 router.delete("/api/user-delete/:id", async (req, res) => {
   const userId = req.params.id;
   try {
     const user = await User.deleteOne({ _id: userId });
-    res.status(200).json({
-      msg: "User deleted successfully",
-    });
+    res.status(200).json("User deleted successfully");
   } catch (error) {
     console.log(error);
-    res.status(400).json({
-      msg: "Something went wrong",
-    });
+    res.status(400).json("Something went wrong");
   }
 });
-
-//Testi ukon luonti
+//Test account creation
 router.post("/api/test_user_creation", async (req, res) => {
   try {
     const test_user = await User.create({
       userName: "testi-ukko",
       password: "password123",
-      favoriteThing: "omena, banaani",
     });
     res.status(201).json("Test user created");
   } catch (error) {
