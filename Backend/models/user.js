@@ -17,22 +17,8 @@ const userSchema = new mongoose.Schema({
     maxlength: 16,
     trim: true,
   },
-  favoriteThing: {
-    type: [String],
-    // Muutin Falseksi sillä ei ole kirjautumisen näkökulmasta välttämätön
-    required: false,
-    // Jos ei löydy lempi asiaa niin ei validoida
-    default: false,
-    validate: {
-      validator: function (arr) {
-        return arr.length > 0;
-      },
-      message: "List atleast one thing",
-    },
-  },
 });
-
-//Salasanan bcryptaus
+//Password salting and hashing
 userSchema.pre("save", async function (next) {
   try {
     const salt = await bcrypt.genSalt(10);
