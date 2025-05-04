@@ -1,8 +1,84 @@
-# Projektin aihe
-Meidän aihe on Säästölaskuri. Sivun ideana on että käyttäjä pystyy syöttämään vuosikohtaisesti säästötavoitteet, toteutuneet säästösummat sekä tarkastelemaan jo saavutettuja säästöjä.
+# 💰 Savings Application
+
+A full-stack savings calculator app with signin/login features. 
 
 
+## ⚙️ Features
+
+- 🔐 User authentication (register/login)  
+- 💸 Calculate savings   
+- 🌐 RESTful API  
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/ville23023/Saastolaskuri
+cd Saastolaskuri
+```
+
+### 2. Install dependencies
+
+```bash
+cd Frontend
+npm install
+
+# For server
+cd Backend
+npm install
+```
+
+### 3. Set up environment variables
+
+Create a `.env` file in the `Backend` directory with the following:
+
+```
+PORT= [PortOfYourChoosing
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+```
+
+### 4. Run the application
+
+```bash
+# Start frontend
+cd Frontend
+npm run dev
+
+# Start backend
+cd Backend
+nodemon server.js
+```
+
+## 📦 Tech Stack
+
+**Frontend**
+
+- React  
+- TypeScript  
+- Tailwind CSS  
+- Vite  
+
+**Backend**
+
+- Node.js  
+- Express  
+- MongoDB + Mongoose  
+- JSON Web Tokens (JWT)
+- BCrytp
+
+**Other Tools**
+
+- Axios  
+- dotenv  
+- nodemon  
 
 
-# Tiimin jäsenet
-Rebekka K, Ville K ja Otto A
+## 👨‍💻 Authors
+
+Developed by :
+
+ -[Otto A](https://github.com/OAnsaharju)
+ -[Rebekka]
+ -[Ville]
