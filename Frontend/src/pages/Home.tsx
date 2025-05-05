@@ -5,9 +5,7 @@ const Home = () => {
         Welcome to the Savings Planner!
       </h1>
       <p className="mt-4 text-lg text-center animate__animated animate__fadeIn animate__delay-1s">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ultricies
-        orci a massa viverra, nec dapibus elit placerat. Nulla facilisi. Integer
-        condimentum ac libero at iaculis.
+        Use our calculator to see how long it will take to achieve your goal. Sign up and start planning today.
       </p>
     </div>
   );

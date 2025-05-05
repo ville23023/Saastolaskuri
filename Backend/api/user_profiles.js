@@ -19,7 +19,7 @@ router.post("/api/sign-up", async (req, res) => {
 router.post("/api/login", async (req, res) => {
   const { userName, password } = req.body;
   try {
-    const user = await User.findOne({ userName });
+    const user = await User.findOne({ userName }).select("+password");
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(401).send("Incorrect username or password");
     }

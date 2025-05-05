@@ -16,6 +16,7 @@ const userSchema = new mongoose.Schema({
     minlength: 8,
     maxlength: 16,
     trim: true,
+    select: false
   },
 });
 //Password salting and hashing
