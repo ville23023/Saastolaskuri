@@ -53,7 +53,7 @@ const Navbar: React.FC = () => {
 
         {/* Mobile menu button */}
         <div className="md:hidden">
-          <button onClick={toggleMenu} className="focus:outline-none">
+          <button onClick={toggleMenu} className="focus:outline-none" aria-label={menuOpen ? "Close menu" : "Open menu"}>
             {menuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
