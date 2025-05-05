@@ -80,5 +80,5 @@ nodemon server.js
 Developed by :
 
  -[Otto A](https://github.com/OAnsaharju)
- -[Rebekka]
+ -[Rebekka](https://github.com/Rebepekka)
  -[Ville](https://github.com/ville23023)
