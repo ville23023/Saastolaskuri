@@ -4,7 +4,7 @@ const Home = () => {
       <h1 className="text-4xl font-bold animate__animated animate__fadeIn">
         Welcome to the Savings Planner!
       </h1>
-      <p className="mt-4 text-lg text-center animate__animated animate__fadeIn animate__delay-1s">
+      <p className="mt-4 text-lg text-center animate__animated animate__fadeIn animate__delay-1s" style={{ lineHeight: "1.6" }}>
         Use our calculator to see how long it will take to achieve your goal. Sign up and start planning today.
       </p>
     </div>
