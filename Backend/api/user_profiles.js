@@ -37,7 +37,7 @@ router.get("/api/users", authenticate, async (req, res) => {
   try {
     const result = await User.find();
     res.status(200).json({
-      status: "Succes",
+      status: "Success",
       results: result.length,
       data: result,
     });
@@ -60,7 +60,7 @@ router.get("/api/user/:id", async (req, res) => {
 //Update user
 router.patch("/api/user-update/:id", async (req, res) => {
   const userToUpdate = req.params.id;
-  const { userName, password} = req.body;
+  const { userName, password } = req.body;
   try {
     const user = await User.findById(userToUpdate);
     if (user) {
@@ -79,7 +79,7 @@ router.patch("/api/user-update/:id", async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(400).json("Something went wrong")
+    res.status(400).json("Something went wrong");
   }
 });
 //Delete user
