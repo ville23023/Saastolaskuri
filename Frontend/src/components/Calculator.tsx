@@ -50,18 +50,13 @@ const Calculator: React.FC = () => {
         </button>
       </div>
 
-      {calculatedWeeks !== null && (
-        <div className="text-center text-lg">
-          {calculatedWeeks > 0 ? (
-            <p>
-              You will reach your goal in{" "}
-              <span className="font-bold">{calculatedWeeks}</span> week(s).
-            </p>
-          ) : (
-            <p className="text-green-400 font-bold">Goal already achievable!</p>
+      <div className="text-center text-lg" aria-live="polite">
+        {calculatedWeeks !== null && (
+          <p className={calculatedWeeks > 0 ? "" : "text-green-400 font-bold"}>
+            {calculatedWeeks > 0 ? ( <>You will reach your goal in {" "} <span className="font-bold">{calculatedWeeks}</span> week(s). </> ) : ("Goal already achievable!")}
+          </p>
           )}
-        </div>
-      )}
+      </div>
     </div>
   );
 };
