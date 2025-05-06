@@ -44,7 +44,7 @@ const Login: React.FC = () => {
         onSubmit={handleSubmit}
         className="bg-white p-8 rounded-lg shadow-lg w-96 relative" role="form" aria-labelledby="login-title"
       >
-        <h2 id="login-title" className="text-2xl font-bold mb-6 text-center">Login</h2>
+        <h1 id="login-title" className="text-2xl font-bold mb-6 text-center">Login</h1>
 
         <div className="mb-4">
           <label
