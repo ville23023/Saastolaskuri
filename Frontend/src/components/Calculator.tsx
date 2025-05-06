@@ -10,8 +10,12 @@ const Calculator: React.FC = () => {
     const target = parseFloat(targetAmount);
 
     if (!isNaN(weekly) && !isNaN(target) && weekly > 0 && target > 0) {
+      if (target <= weekly) {
+        setCalculatedWeeks(0);
+      } else {
       const weeks = Math.ceil(target / weekly);
       setCalculatedWeeks(weeks);
+      }
     } else {
       setCalculatedWeeks(null);
     }
