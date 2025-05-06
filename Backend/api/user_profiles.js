@@ -63,20 +63,13 @@ router.patch("/api/user-update/:id", async (req, res) => {
   const { userName, password } = req.body;
   try {
     const user = await User.findById(userToUpdate);
-    if (user) {
-      const result = await User.updateOne(
-        { _id: userToUpdate },
-        {
-          $set: {
-            userName: userName,
-            password: password,
-          },
-        }
-      );
-      res.status(200).json("User updated successfully");
-    } else {
+    if (!user) {
       res.status(204).json("User not found");
     }
+    if(userName) user.userName = userName;
+    if(password) user.password = password;
+    await user.save();
+    res.status(200).json("Update completed")
   } catch (error) {
     console.log(error);
     res.status(400).json("Something went wrong");
