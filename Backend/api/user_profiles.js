@@ -9,10 +9,14 @@ const authenticate = require("../middleware/authUser");
 router.post("/api/sign-up", async (req, res) => {
   try {
     const result = await User.create(req.body);
-    res.status(201).json("Account created successfully");
+    res.status(201).json({ message: "Account created successfully" });
   } catch (error) {
     console.log(error);
-    res.status(400).json("Something went wrong");
+    if (error.code === 11000) {
+      res.status(400).json({ error: "Username already exists" });
+    } else {
+      res.status(400).json({ error: "Something went wrong" });
+    }
   }
 });
 //Login
@@ -21,7 +25,7 @@ router.post("/api/login", async (req, res) => {
   try {
     const user = await User.findOne({ userName }).select("+password");
     if (!user || !(await bcrypt.compare(password, user.password))) {
-      return res.status(401).send("Incorrect username or password");
+      return res.status(401).json({ error: "Incorrect username or password" });
     }
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, {
       expiresIn: "1h",

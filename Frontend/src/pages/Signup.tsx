@@ -7,26 +7,35 @@ const Signup: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showModal, setShowModal] = useState(false);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:3000/api/sign-up", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userName: username,
-        password: password,
-        favoriteThing: ["placeholderThing"],
-      }),
-    });
+    try {
+      const response = await fetch("http://localhost:3000/api/sign-up", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userName: username, password }),
+      });
 
-    if (response.ok) {
-      console.log("Signup successful");
-      navigate("/login");
-    } else {
-      console.log("Signup failed");
+      const isJson = response.headers
+        .get("content-type")
+        ?.includes("application/json");
+      const data = isJson ? await response.json() : {};
+
+      if (response.ok) {
+        navigate("/login");
+      } else {
+        setErrorMessage(data.error || "Signup failed");
+        setShowModal(true);
+      }
+    } catch (err) {
+      setErrorMessage("Network error. Please try again.");
+      setShowModal(true);
     }
   };
 
@@ -37,6 +46,7 @@ const Signup: React.FC = () => {
         className="bg-white p-8 rounded-lg shadow-lg w-96"
       >
         <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
+
         <div className="mb-4">
           <label
             htmlFor="username"
@@ -53,6 +63,7 @@ const Signup: React.FC = () => {
             autoComplete="off"
           />
         </div>
+
         <div className="mb-4">
           <label
             htmlFor="password"
@@ -69,16 +80,37 @@ const Signup: React.FC = () => {
             autoComplete="off"
           />
         </div>
+
         <button
           type="submit"
           className="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
         >
           Sign Up
         </button>
-        <p className="p-4">
-          Already have an account? <Link to="/login">Log in here</Link>
+
+        <p className="p-4 text-sm text-center">
+          Already have an account?{" "}
+          <Link to="/login" className="text-blue-600 underline">
+            Log in here
+          </Link>
         </p>
       </form>
+      {showModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-md shadow-lg w-80 text-center">
+            <h3 className="text-lg font-semibold text-red-600 mb-4">
+              Signup Failed
+            </h3>
+            <p className="text-gray-700">{errorMessage}</p>
+            <button
+              onClick={() => setShowModal(false)}
+              className="mt-6 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
