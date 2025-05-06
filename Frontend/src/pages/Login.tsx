@@ -42,9 +42,9 @@ const Login: React.FC = () => {
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-8 rounded-lg shadow-lg w-96 relative"
+        className="bg-white p-8 rounded-lg shadow-lg w-96 relative" role="form" aria-labelledby="login-title"
       >
-        <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+        <h2 id="login-title" className="text-2xl font-bold mb-6 text-center">Login</h2>
 
         <div className="mb-4">
           <label
