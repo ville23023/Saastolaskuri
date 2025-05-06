@@ -39,9 +39,11 @@ const CalculatorApp: React.FC = () => {
   }, []);
 
   return (
-    <div className="p-8">
+    <div className="p-10">
       {username ? (
-        <h1 className="text-2xl font-bold">Welcome, {username}!</h1>
+        <h1 className="text-2xl font-bold text-center pb-10">
+          Welcome, {username}!
+        </h1>
       ) : (
         <p>Loading user info...</p>
       )}
