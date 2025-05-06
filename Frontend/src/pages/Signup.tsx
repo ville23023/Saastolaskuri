@@ -88,7 +88,7 @@ const Signup: React.FC = () => {
           Sign Up
         </button>
 
-        <p className="p-4 text-sm text-center">
+        <p className="p-4 text-sm text-center" style={{ lineHeight: "1.6" }}>
           Already have an account?{" "}
           <Link to="/login" className="text-blue-600 underline">
             Log in here
