@@ -87,7 +87,7 @@ const Login: React.FC = () => {
           Login
         </button>
 
-        <p className="p-4 text-sm text-center">
+        <p className="p-4 text-sm text-center" style={{ lineHeight: "1.6" }}>
           Don&apos;t have an account?{" "}
           <Link to="/signup" className="text-blue-600 underline">
             Sign up here
