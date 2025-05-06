@@ -22,8 +22,8 @@ const Calculator: React.FC = () => {
   };
 
   return (
-    <div className="bg-gray-800 text-white rounded-2xl p-6 shadow-lg w-full max-w-sm mx-auto">
-      <h2 className="text-2xl font-semibold mb-4 text-center">
+    <div className="bg-gray-800 text-white rounded-2xl p-6 shadow-lg w-full max-w-sm mx-auto" role="region" aria-labelledby="savings-title">
+      <h2 id="savings-title" className="text-2xl font-semibold mb-4 text-center">
         Savings Goal Planner
       </h2>
 
