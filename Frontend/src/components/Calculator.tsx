@@ -30,6 +30,7 @@ const Calculator: React.FC = () => {
       <div className="flex flex-col gap-4 mb-6">
         <input
           type="number"
+          aria-label="Enter the amount you save weekly in euros"
           placeholder="Weekly savings amount (€)"
           value={weeklySavings}
           onChange={(e) => setWeeklySavings(e.target.value)}
@@ -37,6 +38,7 @@ const Calculator: React.FC = () => {
         />
         <input
           type="number"
+          aria-label="Enter your target amount in euros"
           placeholder="Target amount (€)"
           value={targetAmount}
           onChange={(e) => setTargetAmount(e.target.value)}
