@@ -106,6 +106,7 @@ const Signup: React.FC = () => {
           aria-labelledby="modalTitle"
           aria-describedby="modalDescription"
           aria-live="assertive"
+          aria-modal="true"
           tabIndex={-1}
         >
           <div
