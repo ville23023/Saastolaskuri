@@ -9,6 +9,19 @@ A full-stack savings calculator app with signin/login features.
 - 💸 Calculate savings   
 - 🌐 RESTful API  
 
+
+**Accessibility**
+
+- The site is created to cater to common screen reader functionalities
+- Initial tests done with NVDA
+- User should be able to use the app in browser using screen readers and keyboard only the experience is still a bit clanky but useable.
+
+**Work in progress**
+
+- Screen reader functionalities need to be honed
+- NVDA optimization is in order
+
+
 ## 🚀 Getting Started
 
 ### 1. Clone the repository
@@ -34,7 +47,7 @@ npm install
 Create a `.env` file in the `Backend` directory with the following:
 
 ```
-PORT= [PortOfYourChoosing
+PORT= [PortOfYourChoosing]
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 ```
