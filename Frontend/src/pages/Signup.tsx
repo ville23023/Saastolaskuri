@@ -43,9 +43,13 @@ const Signup: React.FC = () => {
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-8 rounded-lg shadow-lg w-96" role="form" aria-labelledby="signup-title"
+        className="bg-white p-8 rounded-lg shadow-lg w-96"
+        role="form"
+        aria-labelledby="signup-title"
       >
-        <h1 id="signup-title" className="text-2xl font-bold mb-6 text-center">Sign Up</h1>
+        <h1 id="signup-title" className="text-2xl font-bold mb-6 text-center">
+          Sign Up
+        </h1>
 
         <div className="mb-4">
           <label
@@ -96,15 +100,33 @@ const Signup: React.FC = () => {
         </p>
       </form>
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-md shadow-lg w-80 text-center">
-            <h3 className="text-lg font-semibold text-red-600 mb-4">
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+          role="dialog"
+          aria-labelledby="modalTitle"
+          aria-describedby="modalDescription"
+          aria-live="assertive"
+          tabIndex={-1}
+        >
+          <div
+            className="bg-white p-6 rounded-md shadow-lg w-80 text-center"
+            role="document"
+            tabIndex={-1}
+          >
+            <h3
+              id="modalTitle"
+              className="text-lg font-semibold text-red-600 mb-4"
+            >
               Signup Failed
             </h3>
-            <p className="text-gray-700">{errorMessage}</p>
+
+            <p id="modalDescription" className="text-gray-700">
+              {errorMessage || "An unknown error occurred. Please try again."}{" "}
+            </p>
             <button
               onClick={() => setShowModal(false)}
               className="mt-6 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              aria-label="Close Modal"
             >
               Close
             </button>
