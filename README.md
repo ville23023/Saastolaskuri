@@ -9,13 +9,13 @@ A full-stack savings calculator app with signin/login features.
 - 💸 Calculate savings   
 - 🌐 RESTful API  
 
-
 **Accessibility**
 
 - The site is created to cater to common screen reader functionalities
 - Initial tests done with NVDA
 - User should be able to use the app in browser using screen readers and keyboard only the experience is still a bit clanky but useable.
 - The site is ran through Wave site checker and returns no errrors
+- App coloring done with accessibility in mind
 
 **Work in progress**
 
