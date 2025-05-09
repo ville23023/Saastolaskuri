@@ -98,6 +98,7 @@ const Login: React.FC = () => {
           </Link>
         </p>
       </form>
+      {/*Modal includes ARIA attributes for screen reader users.*/}
       {showModal && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
@@ -119,7 +120,7 @@ const Login: React.FC = () => {
             >
               Login Failed
             </h3>
-
+            {/*Errors are handled dynamically.*/}
             <p id="modalDescription" className="text-gray-700">
               {errorMessage || "An unknown error occurred. Please try again."}{" "}
             </p>
